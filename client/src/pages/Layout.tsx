@@ -2,6 +2,7 @@ import { ReactNode, useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
+import ThemeToggle from "@/components/ThemeToggle";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface LayoutProps {
@@ -39,6 +40,7 @@ export default function Layout({ children }: LayoutProps) {
       <AnimatePresence>
         {showBackToTop && <BackToTop />}
       </AnimatePresence>
+      <ThemeToggle />
     </div>
   );
 }

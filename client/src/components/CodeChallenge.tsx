@@ -30,11 +30,11 @@ export default function CodeChallenge() {
   
   const { data: challenges = [], isLoading } = useQuery({
     queryKey: ['/api/code-challenges'],
-  });
+  }) as { data: any[]; isLoading: boolean };
   
   const { data: leaderboard = [] } = useQuery({
     queryKey: ['/api/code-challenges/leaderboard'],
-  });
+  }) as { data: any[]; isLoading: boolean };
   
   const runMutation = useMutation({
     mutationFn: async (payload: { challengeId: number; code: string }) => {

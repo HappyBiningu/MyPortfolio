@@ -33,7 +33,7 @@ export default function CommunityContributions() {
   
   const { data: codeSnippets = [], isLoading } = useQuery({
     queryKey: ['/api/code-snippets'],
-    select: (data) => data.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()),
+    select: (data: any) => data.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()),
   });
   
   const form = useForm<CodeSnippetFormValues>({
@@ -50,8 +50,11 @@ export default function CommunityContributions() {
     mutationFn: (values: CodeSnippetFormValues) => {
       return apiRequest("/api/code-snippets", {
         method: "POST",
-        body: JSON.stringify(values),
-      });
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(values)
+      } as RequestInit);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/code-snippets'] });

@@ -44,18 +44,6 @@ export default function Footer() {
               </li>
               <li>
                 <a 
-                  href="#education" 
-                  className="hover:text-primary transition-colors"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.querySelector('#education')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
-                  Education
-                </a>
-              </li>
-              <li>
-                <a 
                   href="#skills" 
                   className="hover:text-primary transition-colors"
                   onClick={(e) => {
@@ -68,14 +56,14 @@ export default function Footer() {
               </li>
               <li>
                 <a 
-                  href="#projects" 
+                  href="#live-data" 
                   className="hover:text-primary transition-colors"
                   onClick={(e) => {
                     e.preventDefault();
-                    document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' });
+                    document.querySelector('#live-data')?.scrollIntoView({ behavior: 'smooth' });
                   }}
                 >
-                  Projects
+                  Live Data
                 </a>
               </li>
               <li>
@@ -88,6 +76,30 @@ export default function Footer() {
                   }}
                 >
                   Code Lab
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#ml-demo" 
+                  className="hover:text-primary transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.querySelector('#ml-demo')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  ML Demo
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#resources" 
+                  className="hover:text-primary transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.querySelector('#resources')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  Resources
                 </a>
               </li>
               <li>

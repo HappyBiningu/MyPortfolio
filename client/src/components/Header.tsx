@@ -10,10 +10,15 @@ const navLinks = [
   { href: "#education", label: "Education" },
   { href: "#skills", label: "Skills" },
   { href: "#projects", label: "Projects" },
+  { href: "#live-data", label: "Live Data" },
   { href: "#certifications", label: "Certifications" },
+  { href: "#codelab", label: "Code Lab" },
+  { href: "#ml-demo", label: "ML Demo" },
+  { href: "#code-challenge", label: "Challenges" },
+  { href: "#community", label: "Community" },
+  { href: "#resources", label: "Resources" },
   { href: "#testimonials", label: "Testimonials" },
   { href: "#future", label: "Future Goals" },
-  { href: "#codelab", label: "Code Lab" },
   { href: "#contact", label: "Contact" },
 ];
 

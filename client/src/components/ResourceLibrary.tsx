@@ -31,7 +31,7 @@ export default function ResourceLibrary() {
   
   const { data: resources = [], isLoading } = useQuery({
     queryKey: ['/api/resources'],
-    select: (data) => data.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()),
+    select: (data: any) => data.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()),
   });
   
   // Filter resources based on search query and selected tab

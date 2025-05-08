@@ -30,10 +30,10 @@ export default function Hero() {
               Hi, I'm <span className="text-primary">Tinotenda Biningu</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 mb-6">
-              Data Scientist & AI Enthusiast
+              Data & AI Engineer | Software Developer
             </p>
             <p className="text-gray-700 mb-8 max-w-lg mx-auto md:mx-0">
-              Passionate about transforming data into actionable insights and building AI solutions that solve real-world problems.
+              Certified Data and AI Engineer with expertise in Python, JavaScript, and SQL. Building innovative solutions that transform complex data into actionable insights and solve real-world problems.
             </p>
             
             <div className="flex flex-wrap gap-4 justify-center md:justify-start">
@@ -47,7 +47,7 @@ export default function Hero() {
             
             <div className="flex mt-8 space-x-4 justify-center md:justify-start">
               <a 
-                href="https://github.com/tinotendabiningu" 
+                href="https://github.com/HappyBiningu" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-700 hover:text-primary transition-colors"

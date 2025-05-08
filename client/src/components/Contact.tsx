@@ -183,7 +183,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <h4 className="font-medium">Email</h4>
-                      <p className="text-gray-600">tinotenda.biningu@example.com</p>
+                      <p className="text-gray-600">bininguh@gmail.com</p>
                     </div>
                   </div>
                   
@@ -193,7 +193,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <h4 className="font-medium">Phone</h4>
-                      <p className="text-gray-600">+1 (555) 123-4567</p>
+                      <p className="text-gray-600">+27 698 944 682</p>
                     </div>
                   </div>
                   
@@ -203,7 +203,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <h4 className="font-medium">Location</h4>
-                      <p className="text-gray-600">New York, NY</p>
+                      <p className="text-gray-600">Johannesburg, Gauteng, South Africa</p>
                     </div>
                   </div>
                 </div>
@@ -212,7 +212,7 @@ export default function Contact() {
                   <h4 className="font-medium mb-4">Connect with me</h4>
                   <div className="flex space-x-4">
                     <Button variant="default" size="icon" className="bg-gray-800 hover:bg-gray-700 h-10 w-10 rounded-full" asChild>
-                      <a href="https://github.com/tinotendabiningu" target="_blank" rel="noopener noreferrer">
+                      <a href="https://github.com/HappyBiningu" target="_blank" rel="noopener noreferrer">
                         <Github className="h-5 w-5" />
                       </a>
                     </Button>

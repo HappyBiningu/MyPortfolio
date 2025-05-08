@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Twitter } from "lucide-react";
+import profileImage from "@/assets/profile.jpeg";
 
 export default function Hero() {
   return (
@@ -14,7 +15,7 @@ export default function Hero() {
             transition={{ duration: 0.5 }}
           >
             <img 
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600" 
+              src={profileImage} 
               alt="Tinotenda Biningu" 
               className="rounded-full w-48 h-48 md:w-72 md:h-72 object-cover mx-auto md:mx-0 shadow-lg border-4 border-white"
             />

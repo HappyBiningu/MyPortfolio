@@ -42,7 +42,13 @@ export default function Contact() {
 
   const mutation = useMutation({
     mutationFn: (values: InsertContact) => {
-      return apiRequest("POST", "/api/contact", values);
+      return apiRequest("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(values)
+      });
     },
     onSuccess: () => {
       toast({

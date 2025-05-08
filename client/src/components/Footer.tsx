@@ -106,7 +106,7 @@ export default function Footer() {
           </div>
           
           <div>
-            <Button variant="primary" className="gap-2">
+            <Button variant="default" className="gap-2 bg-primary hover:bg-primary/90">
               <Download size={18} /> Download Resume
             </Button>
           </div>

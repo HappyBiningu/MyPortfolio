@@ -60,7 +60,7 @@ A modern, responsive portfolio website showcasing data science projects, skills,
 
 ## 🔗 Live Demo
 
-Visit the live portfolio at: [Your Replit Deploy URL]
+Visit the live portfolio at: [Your Deploy URL]
 
 ## 📄 License
 
@@ -68,7 +68,7 @@ MIT License
 
 ## 👤 Contact
 
-- Portfolio: [Your Portfolio URL]
-- LinkedIn: [Your LinkedIn]
-- GitHub: [Your GitHub]
-- Email: [Your Email]
+- Portfolio: [netlify]
+- LinkedIn: [Tinotenda Biningu]
+- GitHub: [https://github.com/HappyBiningu]
+- Email: [bininguh@gmail.com]

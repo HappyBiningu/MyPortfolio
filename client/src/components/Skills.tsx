@@ -11,25 +11,33 @@ import {
   Cloud,
   Table2,
   Flame,
+  Code,
+  FileJson,
+  Monitor,
+  PenTool
 } from "lucide-react";
 
 const technicalSkills = [
   { name: "Python", percentage: 95 },
-  { name: "R", percentage: 85 },
+  { name: "JavaScript", percentage: 88 },
   { name: "SQL", percentage: 90 },
-  { name: "Machine Learning", percentage: 88 },
+  { name: "R", percentage: 85 },
   { name: "Data Visualization", percentage: 92 },
+  { name: "Machine Learning", percentage: 88 },
 ];
 
 const tools = [
   { name: "Pandas", icon: <PieChart className="h-8 w-8 text-primary" /> },
-  { name: "TensorFlow", icon: <Brain className="h-8 w-8 text-primary" /> },
-  { name: "PyTorch", icon: <Flame className="h-8 w-8 text-primary" /> },
-  { name: "Matplotlib", icon: <BarChart3 className="h-8 w-8 text-primary" /> },
+  { name: "Power BI", icon: <BarChart3 className="h-8 w-8 text-primary" /> },
+  { name: "Django", icon: <Code className="h-8 w-8 text-primary" /> },
+  { name: "React", icon: <PenTool className="h-8 w-8 text-primary" /> },
   { name: "PostgreSQL", icon: <Database className="h-8 w-8 text-primary" /> },
   { name: "Git", icon: <GitBranch className="h-8 w-8 text-primary" /> },
   { name: "Tableau", icon: <Table2 className="h-8 w-8 text-primary" /> },
-  { name: "AWS", icon: <Cloud className="h-8 w-8 text-primary" /> },
+  { name: "Azure", icon: <Cloud className="h-8 w-8 text-primary" /> },
+  { name: "TensorFlow", icon: <Brain className="h-8 w-8 text-primary" /> },
+  { name: "Node.js", icon: <FileJson className="h-8 w-8 text-primary" /> },
+  { name: "Odoo", icon: <Monitor className="h-8 w-8 text-primary" /> },
   { name: "Docker", icon: <Server className="h-8 w-8 text-primary" /> },
 ];
 

@@ -2,84 +2,84 @@ import type { ProjectType, CertificationType } from "./types";
 
 export const projects: ProjectType[] = [
   {
-    title: "Optimizing Stock Price Returns",
-    description: "Used Python's pandas and NumPy libraries to analyze historical stock data and develop a predictive model for optimizing returns.",
+    title: "Sign Language Translation System",
+    description: "Developed a real-time sign language translation system that converts sign language into spoken language, with video remote interpreting and interactive learning tools.",
+    image: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=450",
+    technologies: ["Python", "Django", "NumPy", "Computer Vision"],
+    link: "https://github.com/HappyBiningu/MasterSign"
+  },
+  {
+    title: "Financial Report Dashboard",
+    description: "Created an interactive Power BI dashboard for financial reporting, providing real-time metrics, department analytics, and trend identification for data-driven decision making.",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=450",
-    technologies: ["Python", "Pandas", "NumPy", "scikit-learn"],
-    link: "https://www.datacamp.com/portfolio/tinotendabiningu"
+    technologies: ["Power BI", "DAX", "SQL", "Data Visualization"],
+    link: "https://github.com/HappyBiningu/Powerbi-Dash"
   },
   {
-    title: "Web Scraping for Data Analysis",
-    description: "Built a web scraper to collect and analyze real estate data, identifying market trends and investment opportunities.",
-    image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=450",
-    technologies: ["Python", "BeautifulSoup", "Matplotlib", "Pandas"],
-    link: "https://www.datacamp.com/portfolio/tinotendabiningu"
+    title: "Price Prediction Model",
+    description: "Built a machine learning model to predict prices based on historical data and market factors, helping clients make informed investment decisions.",
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=450",
+    technologies: ["Python", "scikit-learn", "Pandas", "Regression Analysis"],
+    link: "https://github.com/HappyBiningu/Price-Prediction"
   },
   {
-    title: "Customer Segmentation Analysis",
-    description: "Used clustering algorithms to segment customers based on purchasing behavior, enabling targeted marketing strategies.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=450",
-    technologies: ["Python", "scikit-learn", "K-Means", "Seaborn"],
-    link: "https://www.datacamp.com/portfolio/tinotendabiningu"
-  },
-  {
-    title: "Sentiment Analysis of Product Reviews",
-    description: "Developed an NLP model to analyze customer reviews, categorizing sentiment and extracting key insights for product improvement.",
-    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=450",
-    technologies: ["Python", "NLTK", "spaCy", "Transformers"],
-    link: "https://www.datacamp.com/portfolio/tinotendabiningu"
-  },
-  {
-    title: "Time Series Forecasting",
-    description: "Built a forecasting model to predict future sales trends using historical data, incorporating seasonal adjustments and market factors.",
+    title: "Time Series Analysis & Forecasting",
+    description: "Implemented time series forecasting models to predict trends and seasonal patterns in business data, enabling proactive business planning.",
     image: "https://images.unsplash.com/photo-1527474305487-b87b222841cc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=450",
-    technologies: ["R", "ARIMA", "Prophet", "ggplot2"],
-    link: "https://www.datacamp.com/portfolio/tinotendabiningu"
+    technologies: ["Python", "ARIMA", "Prophet", "Matplotlib"],
+    link: "https://github.com/HappyBiningu/Time-Series-Analysis-Forecasting-in-py"
   },
   {
-    title: "SQL Database Optimization",
-    description: "Redesigned database schema and optimized queries to improve performance, reducing query execution time by 40%.",
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=450",
-    technologies: ["SQL", "PostgreSQL", "Indexing", "Query Optimization"],
-    link: "https://www.datacamp.com/portfolio/tinotendabiningu"
+    title: "Project Manager Application",
+    description: "Designed and developed a project management tool that helps teams track tasks, manage deadlines, and collaborate effectively on projects.",
+    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=450",
+    technologies: ["JavaScript", "React", "Node.js", "MongoDB"],
+    link: "https://github.com/HappyBiningu/ProjectManager"
+  },
+  {
+    title: "Real Estate Module in Odoo",
+    description: "Developed a custom Odoo module for real estate management, featuring property listings, sales pipeline tracking, and financial reporting.",
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=450",
+    technologies: ["Python", "Odoo", "PostgreSQL", "XML"],
+    link: "https://github.com/HappyBiningu/Real_Estate_Module-in-Odoo"
   }
 ];
 
 export const certifications: CertificationType[] = [
   {
-    title: "Data Scientist with Python",
-    issuer: "DataCamp",
-    description: "Comprehensive training in Python for data science, including data manipulation, visualization, and machine learning.",
+    title: "Certified Data Engineer",
+    issuer: "Microsoft",
+    description: "Advanced certification in designing and implementing data solutions using Microsoft Azure data services and other industry tools.",
     link: "https://www.datacamp.com/portfolio/tinotendabiningu"
   },
   {
-    title: "Machine Learning Scientist",
-    issuer: "DataCamp",
-    description: "Advanced techniques in machine learning, including model selection, validation, and deployment.",
+    title: "Certified AI Engineer for Data Scientists",
+    issuer: "IBM",
+    description: "Professional certification in applying AI principles and techniques to data science problems and development of AI solutions.",
     link: "https://www.datacamp.com/portfolio/tinotendabiningu"
   },
   {
-    title: "SQL Fundamentals",
-    issuer: "DataCamp",
-    description: "Comprehensive SQL skills for data retrieval, manipulation, and database management.",
+    title: "Certified Associate Data Engineer",
+    issuer: "Google Cloud",
+    description: "Certification validating skills in data processing, pipeline design, and machine learning model implementation.",
     link: "https://www.datacamp.com/portfolio/tinotendabiningu"
   },
   {
-    title: "Data Manipulation with R",
-    issuer: "DataCamp",
-    description: "Advanced data manipulation techniques using R and the tidyverse ecosystem.",
+    title: "Data Science Professional Certificate",
+    issuer: "IBM",
+    description: "Comprehensive certification covering the entire data science process from data collection to deployment of machine learning models.",
     link: "https://www.datacamp.com/portfolio/tinotendabiningu"
   },
   {
-    title: "Data Visualization with Tableau",
-    issuer: "DataCamp",
-    description: "Creating effective visualizations and interactive dashboards with Tableau.",
+    title: "Python for Data Science, AI and Development",
+    issuer: "IBM",
+    description: "Specialized training in Python programming for data science applications, AI model development, and software engineering.",
     link: "https://www.datacamp.com/portfolio/tinotendabiningu"
   },
   {
-    title: "Deep Learning Specialization",
-    issuer: "Coursera",
-    description: "Comprehensive training in neural networks, deep learning architectures, and their applications.",
+    title: "Data Visualization with Python",
+    issuer: "IBM",
+    description: "Expert-level certification in creating effective data visualizations using Python's libraries like Matplotlib, Seaborn, and Plotly.",
     link: "https://www.datacamp.com/portfolio/tinotendabiningu"
   }
 ];

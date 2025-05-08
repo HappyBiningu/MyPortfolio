@@ -26,13 +26,13 @@ export default function About() {
           >
             <h3 className="text-2xl font-heading font-semibold mb-4">My Journey</h3>
             <p className="mb-4">
-              I'm a data science professional with a passion for machine learning, data visualization, and developing AI solutions. My journey in the world of data started with a curiosity about how information can be leveraged to make better decisions.
+              I'm a certified Data and AI Engineer with a passion for transforming complex data into actionable insights. Currently pursuing my Bachelor's degree in Data Science and Informatics at Midlands State University, I blend academic knowledge with hands-on experience in software development and data analytics.
             </p>
             <p className="mb-4">
-              With expertise in Python, R, and SQL, I've worked on various data science projects ranging from predictive modeling to natural language processing. I'm constantly learning and exploring new technologies to enhance my skills.
+              My professional journey spans roles as a Junior Software Developer at Creative Studiosz LLC, where I implement design patterns and work within agile teams, and as an ICT Support & Data Analyst at Tobacco Sales Limited, where I developed Power BI dashboards and designed ETL processes for data accuracy.
             </p>
             <p>
-              Currently, I'm focused on developing machine learning models that can be deployed in real-world scenarios to solve complex business problems.
+              I thrive on building innovative solutions like my Sign Language Translation System and Financial Report Dashboard. With a strong foundation in Python, R, JavaScript, and SQL, I'm dedicated to using technology to solve real-world problems and drive business decisions through data-driven approaches.
             </p>
             <div className="mt-8">
               <Button variant="secondary" className="gap-2">

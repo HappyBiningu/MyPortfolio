@@ -44,6 +44,18 @@ export default function Footer() {
               </li>
               <li>
                 <a 
+                  href="#education" 
+                  className="hover:text-primary transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.querySelector('#education')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  Education
+                </a>
+              </li>
+              <li>
+                <a 
                   href="#skills" 
                   className="hover:text-primary transition-colors"
                   onClick={(e) => {
@@ -68,14 +80,14 @@ export default function Footer() {
               </li>
               <li>
                 <a 
-                  href="#certifications" 
+                  href="#codelab" 
                   className="hover:text-primary transition-colors"
                   onClick={(e) => {
                     e.preventDefault();
-                    document.querySelector('#certifications')?.scrollIntoView({ behavior: 'smooth' });
+                    document.querySelector('#codelab')?.scrollIntoView({ behavior: 'smooth' });
                   }}
                 >
-                  Certifications
+                  Code Lab
                 </a>
               </li>
               <li>

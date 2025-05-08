@@ -44,16 +44,19 @@ export default function CodeChallenge() {
       
       const response = await apiRequest(`/api/code-challenges/${payload.challengeId}/run`, {
         method: "POST",
-        body: JSON.stringify({ code: payload.code }),
-      });
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ code: payload.code })
+      } as RequestInit);
       
       return response;
     },
-    onSuccess: (data) => {
-      setTestResults(data.testResults);
-      setExecutionTime(data.executionTime);
+    onSuccess: (data: any) => {
+      setTestResults(data.testResults || []);
+      setExecutionTime(data.executionTime || null);
       
-      const allPassed = data.testResults.every((result: TestResult) => result.passed);
+      const allPassed = data.testResults?.every((result: TestResult) => result.passed) || false;
       if (allPassed) {
         toast({
           title: "Challenge Completed!",

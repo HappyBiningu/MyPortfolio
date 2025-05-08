@@ -68,7 +68,7 @@ MIT License
 
 ## 👤 Contact
 
-- Portfolio: [netlify]
-- LinkedIn: [Tinotenda Biningu]
-- GitHub: [https://github.com/HappyBiningu]
-- Email: [bininguh@gmail.com]
+- Portfolio: netlify
+- LinkedIn: Tinotenda Biningu
+- GitHub: https://github.com/HappyBiningu
+- Email: bininguh@gmail.com

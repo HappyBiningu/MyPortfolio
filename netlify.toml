@@ -1,7 +1,7 @@
 [build]
 base = "."               # Run build from the root folder (where package.json is)
 command = "npm run build"
-publish = "client/dist"  # Path to built static site
+publish = "dist"  # Path to built static site
 
 [build.environment]
 NODE_VERSION = "20"

@@ -72,3 +72,5 @@ MIT License
 - LinkedIn: Tinotenda Biningu
 - GitHub: https://github.com/HappyBiningu
 - Email: bininguh@gmail.com
+
+  [![Netlify Status](https://api.netlify.com/api/v1/badges/3f93a36d-111f-45ba-ab1a-485b4e5dceb6/deploy-status)](https://app.netlify.com/sites/biningutinoportfolio/deploys)

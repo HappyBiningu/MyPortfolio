@@ -1,9 +1,12 @@
 [build]
-  base = "client"
-  publish = "dist"
-  command = "npm run build"
+base = "."               # Run build from the root folder (where package.json is)
+command = "npm run build"
+publish = "client/dist"  # Path to built static site
+
+[build.environment]
+NODE_VERSION = "20"
 
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+from = "/*"
+to = "/index.html"
+status = 200

@@ -60,7 +60,7 @@ A modern, responsive portfolio website showcasing data science projects, skills,
 
 ## 🔗 Live Demo
 
-Visit the live portfolio at: [Your Deploy URL]
+Visit the live portfolio at: https://biningutinoportfolio.netlify.app
 
 ## 📄 License
 
@@ -68,8 +68,8 @@ MIT License
 
 ## 👤 Contact
 
-- Portfolio: netlify
-- LinkedIn: Tinotenda Biningu
+- Portfolio: Personal Portfolio
+- LinkedIn: www.linkedin.com/in/tinotenda-biningu-687928258
 - GitHub: https://github.com/HappyBiningu
 - Email: bininguh@gmail.com
 

@@ -2,13 +2,14 @@ import { useEffect } from "react";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Education from "@/components/Education";
-import Skills from "@/components/Skills";
-import Projects from "@/components/Projects";
+import EnhancedSkills from "@/components/EnhancedSkills";
+import GitHubStatsDashboard from "@/components/GitHubStatsDashboard";
+import GitHubRepoShowcase from "@/components/GitHubRepoShowcase";
+import EnhancedLiveDataProjects from "@/components/EnhancedLiveDataProjects";
 import Certifications from "@/components/Certifications";
 import Testimonials from "@/components/Testimonials";
 import Future from "@/components/Future";
 import CodeLab from "@/components/CodeLab";
-import LiveDataProjects from "@/components/LiveDataProjects";
 import CommunityContributions from "@/components/CommunityContributions";
 import CodeChallenge from "@/components/CodeChallenge";
 import MLDemo from "@/components/MLDemo";
@@ -54,11 +55,12 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <GitHubStatsDashboard />
       <About />
       <Education />
-      <Skills />
-      <Projects />
-      <LiveDataProjects />
+      <EnhancedSkills />
+      <GitHubRepoShowcase />
+      <EnhancedLiveDataProjects />
       <Certifications />
       <CodeLab />
       <MLDemo />

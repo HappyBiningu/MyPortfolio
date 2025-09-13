@@ -483,28 +483,51 @@ Accessories  | 3         | 24          | 3040.00`;
   };
 
   return (
-    <section id="codelab" className="py-16 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <motion.h2
-          className="text-3xl font-heading font-bold text-center mb-4"
+    <section id="codelab" className="py-16 bg-gradient-to-br from-slate-900 via-cyan-900 to-slate-900 overflow-hidden relative">
+      {/* Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiM5QzkyQUMiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSI3IiBjeT0iNyIgcj0iMSIvPjwvZz48L2c+PC9zdmc+')] opacity-20" />
+        <motion.div
+          className="absolute top-20 left-20 w-72 h-72 bg-cyan-500/20 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute bottom-20 right-20 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
         >
-          Interactive Code Lab
-        </motion.h2>
-        
-        <motion.p
-          className="text-center text-gray-600 mb-12 max-w-3xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
-          Practice and learn coding with this interactive code editor. Write and execute code in Python, JavaScript, or SQL. 
-          Experiment with data science concepts, algorithms, and data visualization.
-        </motion.p>
+          <h2 className="text-3xl font-heading font-bold mb-4 text-white">
+            Interactive Code Laboratory
+          </h2>
+          <p className="text-white/70 max-w-2xl mx-auto">
+            Experiment with data science code, run live examples, and build your own solutions
+          </p>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -512,13 +535,13 @@ Accessories  | 3         | 24          | 3040.00`;
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <Card className="shadow-lg">
+          <Card className="glassmorphism border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
             <CardContent className="p-6">
               <div className="flex flex-col md:flex-row gap-6 mb-6">
                 <div className="flex-grow">
                   <div className="flex items-center gap-2 mb-2">
-                    <PanelTop className="h-5 w-5 text-primary" />
-                    <h3 className="text-lg font-semibold">Code Editor</h3>
+                    <PanelTop className="h-5 w-5 text-cyan-400" />
+                    <h3 className="text-lg font-semibold text-white">Code Editor</h3>
                   </div>
                   <div className="flex items-center gap-4 mb-4">
                     <div className="flex-grow">

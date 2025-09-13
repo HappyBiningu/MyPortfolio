@@ -8,6 +8,28 @@ This is a modern, responsive portfolio website for Tinotenda Biningu, showcasing
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Enhancements (September 2025)
+
+### Creative Animations & Visual Enhancements
+- **Floating Particles**: Added dynamic particle system with code symbols floating across backgrounds
+- **Interactive Background**: Mouse-following gradients and animated geometric shapes
+- **Enhanced Hero Section**: Multiple animated gradient layers with pulsing effects
+- **3D Card Effects**: Perspective transforms and hover animations for project showcases
+- **Glassmorphism Design**: Enhanced backdrop blur effects throughout the interface
+
+### GitHub & LinkedIn Integration
+- **Live GitHub Integration**: Real-time display of repositories, statistics, and activity
+- **Professional LinkedIn Showcase**: Dedicated section with professional profile information
+- **Live Terminal Simulation**: Terminal interface showing real GitHub commits and activity
+- **GitHub Stats Dashboard**: Comprehensive visualization of coding activity and language usage
+
+### Advanced Interactions
+- **Enhanced Skills Animation**: Interactive skill bars with hover effects and animated progress
+- **Parallax Scrolling**: Smooth parallax effects for depth and movement
+- **Smooth Transitions**: Enhanced theme switching and page transitions
+- **Micro-animations**: Hover effects, breathing animations, and typewriter effects
+- **Responsive Design**: Optimized for all device sizes with mobile-first approach
+
 ## System Architecture
 
 ### Frontend Architecture

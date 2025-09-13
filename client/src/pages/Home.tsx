@@ -3,8 +3,11 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Education from "@/components/Education";
 import EnhancedSkills from "@/components/EnhancedSkills";
+import EnhancedSkillsAnimation from "@/components/EnhancedSkillsAnimation";
 import GitHubStatsDashboard from "@/components/GitHubStatsDashboard";
 import GitHubRepoShowcase from "@/components/GitHubRepoShowcase";
+import LinkedInShowcase from "@/components/LinkedInShowcase";
+import LiveTerminal from "@/components/LiveTerminal";
 import EnhancedLiveDataProjects from "@/components/EnhancedLiveDataProjects";
 import Certifications from "@/components/Certifications";
 import Testimonials from "@/components/Testimonials";
@@ -56,9 +59,11 @@ export default function Home() {
     <>
       <Hero />
       <GitHubStatsDashboard />
+      <LinkedInShowcase />
+      <LiveTerminal />
       <About />
       <Education />
-      <EnhancedSkills />
+      <EnhancedSkillsAnimation />
       <GitHubRepoShowcase />
       <EnhancedLiveDataProjects />
       <Certifications />

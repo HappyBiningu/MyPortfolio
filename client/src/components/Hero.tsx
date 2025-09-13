@@ -4,6 +4,8 @@ import { Github, Linkedin, Twitter, MapPin, Mail, Download } from "lucide-react"
 import profileImage from "@/assets/profile.jpeg";
 import TypingAnimation from "./TypingAnimation";
 import GitHubActivityTicker from "./GitHubActivityTicker";
+import FloatingParticles from "./FloatingParticles";
+import InteractiveBackground from "./InteractiveBackground";
 
 const roles = [
   "Data Scientist",
@@ -16,8 +18,10 @@ const roles = [
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-hidden">
-      {/* Animated background elements */}
+      {/* Enhanced animated background elements */}
       <div className="absolute inset-0">
+        <InteractiveBackground />
+        <FloatingParticles />
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiM5QzkyQUMiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSI3IiBjeT0iNyIgcj0iMSIvPjwvZz48L2c+PC9zdmc+')] opacity-20" />
         <motion.div
           className="absolute top-20 left-20 w-72 h-72 bg-primary/20 rounded-full blur-3xl"
@@ -41,6 +45,20 @@ export default function Hero() {
             duration: 10,
             repeat: Infinity,
             ease: "easeInOut",
+          }}
+        />
+        
+        {/* Additional dynamic gradients */}
+        <motion.div
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-radial from-cyan-500/10 via-transparent to-transparent rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.3, 1],
+            rotate: [0, 180, 360],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "linear",
           }}
         />
       </div>
@@ -111,9 +129,9 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.7 }}
               className="text-lg lg:text-xl text-white/80 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
             >
-              Certified Data and AI Engineer with expertise in Python, JavaScript, and SQL. 
-              Building innovative solutions that transform complex data into actionable insights 
-              and solve real-world problems.
+              Software Developer & Data Scientist from Johannesburg, passionate about transforming data into insights. 
+              Building scalable solutions with Python, JavaScript, and modern ML frameworks. 
+              Currently focused on AI-powered applications and data engineering pipelines.
             </motion.p>
 
             <motion.div

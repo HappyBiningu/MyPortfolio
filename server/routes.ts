@@ -33,37 +33,58 @@ function setCachedData(key: string, data: any): void {
 let connectionSettings;
 
 async function getAccessToken() {
-  if (connectionSettings && connectionSettings.settings.expires_at && new Date(connectionSettings.settings.expires_at).getTime() > Date.now()) {
-    return connectionSettings.settings.access_token;
-  }
-  
-  const hostname = process.env.REPLIT_CONNECTORS_HOSTNAME
-  const xReplitToken = process.env.REPL_IDENTITY 
-    ? 'repl ' + process.env.REPL_IDENTITY 
-    : process.env.WEB_REPL_RENEWAL 
-    ? 'depl ' + process.env.WEB_REPL_RENEWAL 
-    : null;
-
-  if (!xReplitToken) {
-    throw new Error('X_REPLIT_TOKEN not found for repl/depl');
-  }
-
-  connectionSettings = await fetch(
-    'https://' + hostname + '/api/v2/connection?include_secrets=true&connector_names=github',
-    {
-      headers: {
-        'Accept': 'application/json',
-        'X_REPLIT_TOKEN': xReplitToken
-      }
+  try {
+    // Check if we have valid cached connection settings
+    if (connectionSettings && connectionSettings.settings && connectionSettings.settings.expires_at && new Date(connectionSettings.settings.expires_at).getTime() > Date.now()) {
+      return connectionSettings.settings.access_token;
     }
-  ).then(res => res.json()).then(data => data.items?.[0]);
+    
+    const hostname = process.env.REPLIT_CONNECTORS_HOSTNAME;
+    const xReplitToken = process.env.REPL_IDENTITY 
+      ? 'repl ' + process.env.REPL_IDENTITY 
+      : process.env.WEB_REPL_RENEWAL 
+      ? 'depl ' + process.env.WEB_REPL_RENEWAL 
+      : null;
 
-  const accessToken = connectionSettings?.settings?.access_token || connectionSettings.settings?.oauth?.credentials?.access_token;
+    if (!xReplitToken || !hostname) {
+      return null; // Return null instead of throwing
+    }
 
-  if (!connectionSettings || !accessToken) {
-    throw new Error('GitHub not connected');
+    const response = await fetch(
+      'https://' + hostname + '/api/v2/connection?include_secrets=true&connector_names=github',
+      {
+        headers: {
+          'Accept': 'application/json',
+          'X_REPLIT_TOKEN': xReplitToken
+        }
+      }
+    );
+    
+    if (!response.ok) {
+      console.warn('Failed to fetch GitHub connection settings:', response.status);
+      return null;
+    }
+    
+    const data = await response.json();
+    connectionSettings = data.items?.[0];
+
+    if (!connectionSettings || !connectionSettings.settings) {
+      console.warn('GitHub connection not configured');
+      return null;
+    }
+
+    const accessToken = connectionSettings.settings.access_token || connectionSettings.settings.oauth?.credentials?.access_token;
+    
+    if (!accessToken) {
+      console.warn('GitHub access token not found in connection settings');
+      return null;
+    }
+    
+    return accessToken;
+  } catch (error) {
+    console.warn('Error getting GitHub access token:', error.message);
+    return null;
   }
-  return accessToken;
 }
 
 // WARNING: Never cache this client.
@@ -71,6 +92,9 @@ async function getAccessToken() {
 // Always call this function again to get a fresh client.
 async function getUncachableGitHubClient() {
   const accessToken = await getAccessToken();
+  if (!accessToken) {
+    return null; // Return null if no access token available
+  }
   return new Octokit({ auth: accessToken });
 }
 
@@ -107,6 +131,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       const octokit = await getGitHubClient();
+      if (!octokit) {
+        return res.json({ message: "GitHub integration not configured", data: null });
+      }
+      
       const { data: user } = await octokit.rest.users.getByUsername({
         username: 'HappyBiningu'
       });
@@ -115,13 +143,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(user);
     } catch (error) {
       console.error('GitHub profile error:', error);
-      res.status(500).json({ message: "Failed to fetch GitHub profile" });
+      res.json({ message: "GitHub data unavailable", data: null });
     }
   });
 
   app.get("/api/github/repos", async (req, res) => {
     try {
       const octokit = await getGitHubClient();
+      if (!octokit) {
+        return res.json([]);
+      }
+      
       const { data: repos } = await octokit.rest.repos.listForUser({
         username: 'HappyBiningu',
         sort: 'updated',
@@ -153,13 +185,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(reposWithDetails);
     } catch (error) {
       console.error('GitHub repos error:', error);
-      res.status(500).json({ message: "Failed to fetch GitHub repositories" });
+      res.json([]);
     }
   });
 
   app.get("/api/github/activity", async (req, res) => {
     try {
       const octokit = await getGitHubClient();
+      if (!octokit) {
+        return res.json([]);
+      }
+      
       const { data: events } = await octokit.rest.activity.listPublicEventsForUser({
         username: 'HappyBiningu',
         per_page: 10
@@ -167,13 +203,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(events);
     } catch (error) {
       console.error('GitHub activity error:', error);
-      res.status(500).json({ message: "Failed to fetch GitHub activity" });
+      res.json([]);
     }
   });
 
   app.get("/api/github/stats", async (req, res) => {
     try {
       const octokit = await getGitHubClient();
+      if (!octokit) {
+        return res.json({
+          profile: { login: 'HappyBiningu', name: 'Tinotenda Happy', bio: 'Software Developer', public_repos: 0, followers: 0, following: 0 },
+          stats: { totalStars: 0, totalForks: 0, totalRepos: 0 },
+          languages: []
+        });
+      }
       
       // Get user profile
       const { data: user } = await octokit.rest.users.getByUsername({
@@ -237,7 +280,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     } catch (error) {
       console.error('GitHub stats error:', error);
-      res.status(500).json({ message: "Failed to fetch GitHub statistics" });
+      res.json({
+        profile: { login: 'HappyBiningu', name: 'Tinotenda Happy', bio: 'Software Developer', public_repos: 0, followers: 0, following: 0 },
+        stats: { totalStars: 0, totalForks: 0, totalRepos: 0 },
+        languages: []
+      });
     }
   });
 

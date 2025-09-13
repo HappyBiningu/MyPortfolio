@@ -1,6 +1,7 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import { pool } from "./db";
 
 const app = express();
 app.use(express.json());
@@ -36,15 +37,47 @@ app.use((req, res, next) => {
   next();
 });
 
+// Database health check function
+async function verifyDatabaseConnectivity() {
+  try {
+    // Test database connection
+    await pool.query('SELECT 1');
+    log('✓ Database connection verified');
+    return true;
+  } catch (error) {
+    console.error('✗ Database connection failed:', error.message);
+    if (process.env.DATABASE_URL) {
+      console.error('DATABASE_URL is set but connection failed');
+    } else {
+      console.error('DATABASE_URL is not set - database functionality will be limited');
+    }
+    return false;
+  }
+}
+
 (async () => {
+  // Verify database connectivity on startup
+  await verifyDatabaseConnectivity();
+  
   const server = await registerRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
 
-    res.status(status).json({ message });
-    throw err;
+    // Log the error for debugging but don't throw to prevent crashes
+    console.error('API Error:', {
+      status,
+      message,
+      stack: err.stack,
+      url: _req.url,
+      method: _req.method
+    });
+
+    // Only send response if not already sent
+    if (!res.headersSent) {
+      res.status(status).json({ message });
+    }
   });
 
   // importantly only setup vite in development and after

@@ -59,9 +59,8 @@ export default function Home() {
     <>
       <Hero />
       <GitHubStatsDashboard />
-      <LinkedInShowcase />
-      <LiveTerminal />
       <About />
+      <LiveTerminal />
       <Education />
       <EnhancedSkillsAnimation />
       <GitHubRepoShowcase />

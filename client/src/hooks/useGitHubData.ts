@@ -41,16 +41,6 @@ export function useGitHubStats() {
   });
 }
 
-// Bitcoin Price Hook
-export function useBitcoinPrice() {
-  return useQuery({
-    queryKey: ["/api/crypto/bitcoin"],
-    queryFn: () => apiRequest("/api/crypto/bitcoin"),
-    staleTime: 30 * 1000, // 30 seconds
-    refetchInterval: 60 * 1000, // Refetch every minute
-    retry: 2,
-  });
-}
 
 // Combined GitHub data hook for dashboard
 export function useGitHubDashboard() {

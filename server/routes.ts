@@ -288,20 +288,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Live data endpoints for real-time features
-  app.get("/api/crypto/bitcoin", async (req, res) => {
-    try {
-      const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true');
-      const data = await response.json();
-      res.json({
-        price: data.bitcoin.usd,
-        change24h: data.bitcoin.usd_24h_change
-      });
-    } catch (error) {
-      console.error('Crypto API error:', error);
-      res.status(500).json({ message: "Failed to fetch cryptocurrency data" });
-    }
-  });
 
   const httpServer = createServer(app);
 

@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Database, FileSpreadsheet, FileText, Download, BookOpen, Search, Loader2, Code } from "lucide-react";
+import { Database, FileSpreadsheet, FileText, Download, BookOpen, Search, Code } from "lucide-react";
 
 // Define types for resources
 type ResourceType = "dataset" | "starter_code" | "tutorial";
@@ -30,26 +29,8 @@ export default function ResourceLibrary() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState<ResourceType | "all">("all");
   
-  const { data: resources = [], isLoading } = useQuery({
-    queryKey: ['/api/resources'],
-    select: (data: any) => data.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()),
-  });
-  
-  // Filter resources based on search query and selected tab
-  const filteredResources = (resources as Resource[]).filter((resource) => {
-    const matchesSearch = 
-      searchQuery === "" || 
-      resource.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      resource.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (resource.tags && resource.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())));
-    
-    const matchesTab = activeTab === "all" || resource.type === activeTab;
-    
-    return matchesSearch && matchesTab;
-  });
-  
-  // Mock datasets for now
-  const mockResources: Resource[] = [
+  // Static resources data - comprehensive collection for data science
+  const resources: Resource[] = [
     {
       id: 1,
       title: "COVID-19 Case Data",
@@ -140,8 +121,8 @@ export default function ResourceLibrary() {
     }
   ];
   
-  // If we don't have real data yet, use the mock data
-  const displayResources = filteredResources.length > 0 ? filteredResources : mockResources.filter((resource) => {
+  // Filter resources based on search query and selected tab
+  const displayResources = resources.filter((resource) => {
     const matchesSearch = 
       searchQuery === "" || 
       resource.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -312,11 +293,7 @@ export default function ResourceLibrary() {
           </Tabs>
         </div>
         
-        {isLoading ? (
-          <div className="flex justify-center py-12">
-            <Loader2 className="h-8 w-8 animate-spin text-primary" />
-          </div>
-        ) : displayResources.length === 0 ? (
+        {displayResources.length === 0 ? (
           <div className="text-center py-12 bg-white rounded-lg border">
             <Search className="h-12 w-12 text-gray-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold mb-2">No resources found</h3>

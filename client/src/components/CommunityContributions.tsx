@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -11,14 +10,12 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { insertCodeSnippetSchema } from "@shared/schema";
-import { apiRequest } from "@/lib/queryClient";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Code, ThumbsUp, MessageSquare, User } from "lucide-react";
+import { Loader2, Code, ThumbsUp, MessageSquare, User, Calendar, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-const codeSnippetSchema = insertCodeSnippetSchema.extend({
-  userId: z.number().optional(),
+// Define form schema without dependency on shared schema
+const codeSnippetSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters"),
   description: z.string().min(10, "Description must be at least 10 characters"),
   language: z.string().min(1, "Please select a programming language"),
@@ -27,15 +24,411 @@ const codeSnippetSchema = insertCodeSnippetSchema.extend({
 
 type CodeSnippetFormValues = z.infer<typeof codeSnippetSchema>;
 
+type CodeSnippet = {
+  id: number;
+  title: string;
+  description: string;
+  language: string;
+  code: string;
+  username: string;
+  createdAt: string;
+  approved: boolean;
+  likes: number;
+  comments: number;
+};
+
+// Static code snippet data
+const CODE_SNIPPETS: CodeSnippet[] = [
+  {
+    id: 1,
+    title: "Efficient Data Cleaning Pipeline",
+    description: "A comprehensive data cleaning function that handles missing values, outliers, and data type conversions for pandas DataFrames.",
+    language: "python",
+    code: `import pandas as pd
+import numpy as np
+from scipy import stats
+
+def clean_dataframe(df, remove_outliers=True, outlier_method='iqr'):
+    """
+    Comprehensive data cleaning pipeline for pandas DataFrames.
+    
+    Args:
+        df: Input DataFrame
+        remove_outliers: Whether to remove outliers
+        outlier_method: Method for outlier detection ('iqr' or 'zscore')
+    
+    Returns:
+        Cleaned DataFrame
+    """
+    df_clean = df.copy()
+    
+    # Handle missing values
+    for col in df_clean.columns:
+        if df_clean[col].dtype in ['int64', 'float64']:
+            df_clean[col].fillna(df_clean[col].median(), inplace=True)
+        else:
+            df_clean[col].fillna(df_clean[col].mode().iloc[0], inplace=True)
+    
+    # Remove outliers
+    if remove_outliers:
+        numeric_cols = df_clean.select_dtypes(include=[np.number]).columns
+        
+        for col in numeric_cols:
+            if outlier_method == 'iqr':
+                Q1 = df_clean[col].quantile(0.25)
+                Q3 = df_clean[col].quantile(0.75)
+                IQR = Q3 - Q1
+                lower_bound = Q1 - 1.5 * IQR
+                upper_bound = Q3 + 1.5 * IQR
+                df_clean = df_clean[(df_clean[col] >= lower_bound) & (df_clean[col] <= upper_bound)]
+            elif outlier_method == 'zscore':
+                z_scores = np.abs(stats.zscore(df_clean[col]))
+                df_clean = df_clean[z_scores < 3]
+    
+    return df_clean
+
+# Example usage
+# df_cleaned = clean_dataframe(your_dataframe)`,
+    username: "data_scientist_pro",
+    createdAt: "2024-09-10T14:30:00Z",
+    approved: true,
+    likes: 24,
+    comments: 8,
+  },
+  {
+    id: 2,
+    title: "Quick Feature Engineering Helper",
+    description: "Utility functions for common feature engineering tasks including encoding categorical variables and creating polynomial features.",
+    language: "python", 
+    code: `from sklearn.preprocessing import LabelEncoder, OneHotEncoder, PolynomialFeatures
+import pandas as pd
+import numpy as np
+
+def engineer_features(df, categorical_cols=None, polynomial_degree=2, target_col=None):
+    """
+    Feature engineering helper for machine learning preprocessing.
+    
+    Args:
+        df: Input DataFrame
+        categorical_cols: List of categorical columns to encode
+        polynomial_degree: Degree for polynomial features
+        target_col: Target column name (excluded from polynomial features)
+    
+    Returns:
+        DataFrame with engineered features
+    """
+    df_features = df.copy()
+    
+    # Handle categorical variables
+    if categorical_cols:
+        for col in categorical_cols:
+            if df_features[col].nunique() <= 10:
+                # One-hot encoding for low cardinality
+                dummies = pd.get_dummies(df_features[col], prefix=col)
+                df_features = pd.concat([df_features, dummies], axis=1)
+                df_features.drop(col, axis=1, inplace=True)
+            else:
+                # Label encoding for high cardinality
+                le = LabelEncoder()
+                df_features[f'{col}_encoded'] = le.fit_transform(df_features[col].astype(str))
+                df_features.drop(col, axis=1, inplace=True)
+    
+    # Create polynomial features for numeric columns
+    numeric_cols = df_features.select_dtypes(include=[np.number]).columns
+    if target_col and target_col in numeric_cols:
+        numeric_cols = numeric_cols.drop(target_col)
+    
+    if len(numeric_cols) > 1:
+        poly = PolynomialFeatures(degree=polynomial_degree, include_bias=False)
+        poly_features = poly.fit_transform(df_features[numeric_cols])
+        feature_names = poly.get_feature_names_out(numeric_cols)
+        
+        # Add polynomial features
+        poly_df = pd.DataFrame(poly_features, columns=feature_names, index=df_features.index)
+        df_features = pd.concat([df_features, poly_df], axis=1)
+        
+        # Remove original features to avoid duplication
+        df_features.drop(numeric_cols, axis=1, inplace=True)
+    
+    return df_features`,
+    username: "ml_engineer_x",
+    createdAt: "2024-09-08T09:15:00Z", 
+    approved: true,
+    likes: 18,
+    comments: 5,
+  },
+  {
+    id: 3,
+    title: "SQL Query Performance Optimizer",
+    description: "A set of SQL query patterns and optimizations for better database performance, especially useful for large datasets.",
+    language: "sql",
+    code: `-- Optimized query patterns for better performance
+
+-- 1. Use indexed columns in WHERE clauses
+-- GOOD:
+SELECT customer_id, order_date, total_amount 
+FROM orders 
+WHERE customer_id = 12345 
+  AND order_date >= '2024-01-01'
+ORDER BY order_date DESC;
+
+-- 2. Avoid functions in WHERE clauses on large tables
+-- BAD:
+SELECT * FROM orders WHERE YEAR(order_date) = 2024;
+-- GOOD:
+SELECT * FROM orders 
+WHERE order_date >= '2024-01-01' 
+  AND order_date < '2025-01-01';
+
+-- 3. Use EXISTS instead of IN for large subqueries
+-- GOOD:
+SELECT DISTINCT c.customer_name
+FROM customers c
+WHERE EXISTS (
+    SELECT 1 
+    FROM orders o 
+    WHERE o.customer_id = c.customer_id 
+      AND o.order_date >= '2024-01-01'
+);
+
+-- 4. Optimize aggregations with proper GROUP BY
+-- Efficient monthly sales summary
+SELECT 
+    DATE_FORMAT(order_date, '%Y-%m') as month,
+    COUNT(*) as order_count,
+    SUM(total_amount) as monthly_revenue,
+    AVG(total_amount) as avg_order_value
+FROM orders 
+WHERE order_date >= DATE_SUB(NOW(), INTERVAL 12 MONTH)
+GROUP BY DATE_FORMAT(order_date, '%Y-%m')
+ORDER BY month DESC;
+
+-- 5. Window functions for ranking and analytics
+SELECT 
+    customer_id,
+    order_date,
+    total_amount,
+    ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY order_date DESC) as order_rank,
+    LAG(total_amount) OVER (PARTITION BY customer_id ORDER BY order_date) as prev_order_amount
+FROM orders;`,
+    username: "sql_optimizer",
+    createdAt: "2024-09-05T16:45:00Z",
+    approved: true,
+    likes: 31,
+    comments: 12,
+  },
+  {
+    id: 4,
+    title: "React Custom Hook for API State Management",
+    description: "A reusable custom hook that handles loading states, errors, and caching for API calls in React applications.",
+    language: "javascript",
+    code: `import { useState, useEffect, useRef } from 'react';
+
+function useApi(url, options = {}) {
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const cache = useRef({});
+    
+    const {
+        method = 'GET',
+        body = null,
+        headers = {},
+        dependencies = [],
+        cacheTime = 5 * 60 * 1000, // 5 minutes
+        retry = 3
+    } = options;
+    
+    const fetchData = async (retryCount = 0) => {
+        const cacheKey = JSON.stringify({ url, method, body });
+        
+        // Check cache first
+        if (method === 'GET' && cache.current[cacheKey]) {
+            const cachedData = cache.current[cacheKey];
+            if (Date.now() - cachedData.timestamp < cacheTime) {
+                setData(cachedData.data);
+                setLoading(false);
+                return;
+            }
+        }
+        
+        try {
+            setLoading(true);
+            setError(null);
+            
+            const response = await fetch(url, {
+                method,
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...headers
+                },
+                body: body ? JSON.stringify(body) : null
+            });
+            
+            if (!response.ok) {
+                throw new Error(\`HTTP error! status: \${response.status}\`);
+            }
+            
+            const result = await response.json();
+            
+            // Cache GET requests
+            if (method === 'GET') {
+                cache.current[cacheKey] = {
+                    data: result,
+                    timestamp: Date.now()
+                };
+            }
+            
+            setData(result);
+        } catch (err) {
+            if (retryCount < retry) {
+                setTimeout(() => fetchData(retryCount + 1), 1000 * Math.pow(2, retryCount));
+            } else {
+                setError(err.message);
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
+    
+    useEffect(() => {
+        fetchData();
+    }, [url, method, JSON.stringify(body), ...dependencies]);
+    
+    const refetch = () => fetchData();
+    
+    return { data, loading, error, refetch };
+}
+
+// Usage example:
+// const { data: users, loading, error, refetch } = useApi('/api/users');
+// const { data: posts } = useApi('/api/posts', { dependencies: [userId] });
+
+export default useApi;`,
+    username: "react_dev_guru",
+    createdAt: "2024-09-03T11:20:00Z",
+    approved: true,
+    likes: 27,
+    comments: 9,
+  },
+  {
+    id: 5,
+    title: "Advanced Git Workflow Scripts", 
+    description: "Bash scripts for streamlining common Git workflows including automated branch cleanup and smart commit messages.",
+    language: "bash",
+    code: `#!/bin/bash
+
+# Advanced Git workflow automation scripts
+
+# Function: Smart commit with auto-generated message based on changes
+smart_commit() {
+    if [ -z "$(git status --porcelain)" ]; then
+        echo "No changes to commit"
+        return 1
+    fi
+    
+    # Analyze changes to generate smart commit message
+    added_files=$(git diff --cached --name-only --diff-filter=A | wc -l)
+    modified_files=$(git diff --cached --name-only --diff-filter=M | wc -l)
+    deleted_files=$(git diff --cached --name-only --diff-filter=D | wc -l)
+    
+    message="Auto: "
+    
+    if [ $added_files -gt 0 ]; then
+        message+="Add $added_files file(s) "
+    fi
+    
+    if [ $modified_files -gt 0 ]; then
+        message+="Modify $modified_files file(s) "
+    fi
+    
+    if [ $deleted_files -gt 0 ]; then
+        message+="Delete $deleted_files file(s) "
+    fi
+    
+    # Add file types for context
+    file_types=$(git diff --cached --name-only | sed 's/.*\\.//' | sort | uniq | head -3 | tr '\\n' ',' | sed 's/,$//')
+    if [ ! -z "$file_types" ]; then
+        message+="($file_types)"
+    fi
+    
+    git commit -m "$message"
+    echo "Committed with message: $message"
+}
+
+# Function: Clean up merged branches
+cleanup_branches() {
+    echo "Cleaning up merged branches..."
+    
+    # Switch to main/master
+    git checkout main 2>/dev/null || git checkout master 2>/dev/null
+    
+    # Update main branch
+    git pull origin main 2>/dev/null || git pull origin master 2>/dev/null
+    
+    # Get merged branches (excluding main/master and current branch)
+    merged_branches=$(git branch --merged | grep -v "\\*\\|main\\|master" | tr -d ' ')
+    
+    if [ ! -z "$merged_branches" ]; then
+        echo "Found merged branches to clean up:"
+        echo "$merged_branches"
+        
+        read -p "Delete these branches? (y/N): " confirm
+        if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ]; then
+            echo "$merged_branches" | xargs git branch -d
+            echo "Branches cleaned up successfully"
+        fi
+    else
+        echo "No merged branches to clean up"
+    fi
+}
+
+# Function: Interactive rebase helper
+interactive_rebase() {
+    local commit_count=\${1:-5}
+    echo "Starting interactive rebase for last \$commit_count commits..."
+    git rebase -i HEAD~\$commit_count
+}
+
+# Function: Show comprehensive status
+git_status_plus() {
+    echo "=== Git Status Plus ==="
+    echo ""
+    
+    echo "Current branch:"
+    git branch --show-current
+    echo ""
+    
+    echo "Status:"
+    git status --short
+    echo ""
+    
+    echo "Recent commits:"
+    git log --oneline -5
+    echo ""
+    
+    echo "Unpushed commits:"
+    git log @{u}..HEAD --oneline 2>/dev/null || echo "No upstream set"
+}
+
+# Usage examples:
+# smart_commit          # Auto-commit with generated message
+# cleanup_branches      # Clean merged branches
+# interactive_rebase 3  # Interactive rebase last 3 commits
+# git_status_plus      # Comprehensive status`,
+    username: "git_workflow_master",
+    createdAt: "2024-08-28T13:10:00Z",
+    approved: true,
+    likes: 19,
+    comments: 6,
+  }
+];
+
 export default function CommunityContributions() {
   const [activeTab, setActiveTab] = useState("browse");
+  const [codeSnippets, setCodeSnippets] = useState<CodeSnippet[]>(CODE_SNIPPETS);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-  const queryClient = useQueryClient();
-  
-  const { data: codeSnippets = [], isLoading } = useQuery({
-    queryKey: ['/api/code-snippets'],
-    select: (data: any) => data.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()),
-  });
   
   const form = useForm<CodeSnippetFormValues>({
     resolver: zodResolver(codeSnippetSchema),
@@ -47,36 +440,38 @@ export default function CommunityContributions() {
     },
   });
   
-  const submitMutation = useMutation({
-    mutationFn: (values: CodeSnippetFormValues) => {
-      return apiRequest("/api/code-snippets", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(values)
-      } as RequestInit);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/code-snippets'] });
-      form.reset();
-      toast({
-        title: "Contribution Submitted",
-        description: "Your code snippet has been submitted for review.",
-      });
-      setActiveTab("browse");
-    },
-    onError: (error) => {
-      toast({
-        title: "Failed to submit",
-        description: error instanceof Error ? error.message : "An error occurred",
-        variant: "destructive",
-      });
-    },
-  });
-  
   function onSubmit(values: CodeSnippetFormValues) {
-    submitMutation.mutate(values);
+    setIsSubmitting(true);
+    
+    // Simulate API submission delay
+    setTimeout(() => {
+      // Create new snippet with current timestamp
+      const newSnippet: CodeSnippet = {
+        id: Math.max(...codeSnippets.map(s => s.id)) + 1,
+        title: values.title,
+        description: values.description,
+        language: values.language,
+        code: values.code,
+        username: "you",
+        createdAt: new Date().toISOString(),
+        approved: false, // New submissions start as pending
+        likes: 0,
+        comments: 0,
+      };
+      
+      // Add to the beginning of the list (most recent first)
+      setCodeSnippets([newSnippet, ...codeSnippets]);
+      
+      form.reset();
+      setIsSubmitting(false);
+      
+      toast({
+        title: "Contribution Submitted!",
+        description: "Your code snippet has been submitted for review. It will appear in the list once approved.",
+      });
+      
+      setActiveTab("browse");
+    }, 1500); // 1.5 second delay to simulate API call
   }
   
   return (
@@ -131,11 +526,7 @@ export default function CommunityContributions() {
           </TabsList>
           
           <TabsContent value="browse">
-            {isLoading ? (
-              <div className="flex justify-center py-12">
-                <Loader2 className="h-8 w-8 animate-spin text-primary" />
-              </div>
-            ) : codeSnippets.length === 0 ? (
+            {codeSnippets.length === 0 ? (
               <Card>
                 <CardHeader>
                   <CardTitle>No snippets yet</CardTitle>
@@ -298,10 +689,11 @@ export default function CommunityContributions() {
                     <div className="flex justify-end">
                       <Button 
                         type="submit" 
-                        disabled={submitMutation.isPending}
+                        disabled={isSubmitting}
                         className="gap-2"
+                        data-testid="button-submit"
                       >
-                        {submitMutation.isPending && <Loader2 className="h-4 w-4 animate-spin" />}
+                        {isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}
                         Submit Contribution
                       </Button>
                     </div>

@@ -13,10 +13,7 @@ import Certifications from "@/components/Certifications";
 import Testimonials from "@/components/Testimonials";
 import Future from "@/components/Future";
 import CodeLab from "@/components/CodeLab";
-import CommunityContributions from "@/components/CommunityContributions";
-import CodeChallenge from "@/components/CodeChallenge";
 import MLDemo from "@/components/MLDemo";
-import ResourceLibrary from "@/components/ResourceLibrary";
 import Contact from "@/components/Contact";
 
 export default function Home() {
@@ -68,9 +65,6 @@ export default function Home() {
       <Certifications />
       <CodeLab />
       <MLDemo />
-      <CodeChallenge />
-      <CommunityContributions />
-      <ResourceLibrary />
       <Testimonials />
       <Future />
       <Contact />

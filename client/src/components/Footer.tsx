@@ -6,14 +6,14 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="bg-secondary py-8 text-white">
+    <footer className="bg-muted py-8 border-t">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
-            <h3 className="text-2xl font-heading font-bold">
+            <h3 className="text-2xl font-heading font-bold text-foreground">
               TB<span className="text-primary">.</span>
             </h3>
-            <p className="text-gray-400 mt-2">Data Scientist & AI Enthusiast</p>
+            <p className="text-muted-foreground mt-2">Data Scientist & AI Enthusiast</p>
           </div>
           
           <div className="mb-4 md:mb-0">
@@ -21,7 +21,7 @@ export default function Footer() {
               <li>
                 <a 
                   href="#home" 
-                  className="hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                   onClick={(e) => {
                     e.preventDefault();
                     document.querySelector('#home')?.scrollIntoView({ behavior: 'smooth' });
@@ -33,7 +33,7 @@ export default function Footer() {
               <li>
                 <a 
                   href="#about" 
-                  className="hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                   onClick={(e) => {
                     e.preventDefault();
                     document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' });
@@ -45,7 +45,7 @@ export default function Footer() {
               <li>
                 <a 
                   href="#skills" 
-                  className="hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                   onClick={(e) => {
                     e.preventDefault();
                     document.querySelector('#skills')?.scrollIntoView({ behavior: 'smooth' });
@@ -57,7 +57,7 @@ export default function Footer() {
               <li>
                 <a 
                   href="#live-data" 
-                  className="hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                   onClick={(e) => {
                     e.preventDefault();
                     document.querySelector('#live-data')?.scrollIntoView({ behavior: 'smooth' });
@@ -69,7 +69,7 @@ export default function Footer() {
               <li>
                 <a 
                   href="#codelab" 
-                  className="hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                   onClick={(e) => {
                     e.preventDefault();
                     document.querySelector('#codelab')?.scrollIntoView({ behavior: 'smooth' });
@@ -81,7 +81,7 @@ export default function Footer() {
               <li>
                 <a 
                   href="#ml-demo" 
-                  className="hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                   onClick={(e) => {
                     e.preventDefault();
                     document.querySelector('#ml-demo')?.scrollIntoView({ behavior: 'smooth' });
@@ -93,7 +93,7 @@ export default function Footer() {
               <li>
                 <a 
                   href="#resources" 
-                  className="hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                   onClick={(e) => {
                     e.preventDefault();
                     document.querySelector('#resources')?.scrollIntoView({ behavior: 'smooth' });
@@ -105,7 +105,7 @@ export default function Footer() {
               <li>
                 <a 
                   href="#contact" 
-                  className="hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                   onClick={(e) => {
                     e.preventDefault();
                     document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -124,8 +124,8 @@ export default function Footer() {
           </div>
         </div>
         
-        <div className="border-t border-gray-700 mt-8 pt-8 text-center">
-          <p className="text-gray-400">&copy; {currentYear} Tinotenda Biningu. All rights reserved.</p>
+        <div className="border-t mt-8 pt-8 text-center">
+          <p className="text-muted-foreground">&copy; {currentYear} Tinotenda Biningu. All rights reserved.</p>
         </div>
       </div>
     </footer>

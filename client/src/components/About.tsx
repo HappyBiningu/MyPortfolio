@@ -28,8 +28,11 @@ export default function About() {
   };
 
   return (
-    <section id="about" className="py-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
-      <div className="container mx-auto px-4">
+    <section id="about" className="py-16 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiM5QzkyQUMiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSI3IiBjeT0iNyIgcj0iMSIvPjwvZz48L2c+PC9zdmc+')] opacity-20" />
+      
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -37,10 +40,10 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl font-heading font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            About Me & Professional Profile
+          <h2 className="text-3xl font-heading font-bold mb-4 text-white">
+            About Me
           </h2>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="text-white/80 max-w-2xl mx-auto">
             Software Developer & Data Scientist passionate about transforming data into insights and building innovative solutions
           </p>
         </motion.div>
@@ -54,7 +57,7 @@ export default function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <Card className="h-full border-blue-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300">
+            <Card className="h-full glassmorphism border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
               <CardHeader className="pb-4">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-4">
@@ -62,13 +65,13 @@ export default function About() {
                       TB
                     </div>
                     <div>
-                      <CardTitle className="text-xl text-gray-900 dark:text-white">
+                      <CardTitle className="text-xl text-white">
                         {professionalData.name}
                       </CardTitle>
-                      <p className="text-blue-600 dark:text-blue-400 font-medium">
+                      <p className="text-blue-300 font-medium">
                         {professionalData.title}
                       </p>
-                      <div className="flex items-center gap-4 text-gray-500 dark:text-gray-400 text-sm mt-1">
+                      <div className="flex items-center gap-4 text-white/60 text-sm mt-1">
                         <div className="flex items-center gap-1">
                           <MapPin className="h-4 w-4" />
                           {professionalData.location}
@@ -86,8 +89,8 @@ export default function About() {
               <CardContent className="space-y-6">
                 {/* Professional Journey */}
                 <div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-3">My Professional Journey</h3>
-                  <div className="space-y-3 text-gray-600 dark:text-gray-300">
+                  <h3 className="font-semibold text-white mb-3">My Professional Journey</h3>
+                  <div className="space-y-3 text-white/80">
                     <p>
                       Based in <strong>Johannesburg, Gauteng</strong>, I'm a passionate Software Developer and Data Scientist 
                       currently working at <strong>Midlein</strong>, where I specialize in building innovative data solutions 
@@ -108,7 +111,7 @@ export default function About() {
 
                 {/* GitHub Achievements */}
                 <div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-3">GitHub Achievements</h3>
+                  <h3 className="font-semibold text-white mb-3">GitHub Achievements</h3>
                   <div className="flex flex-wrap gap-2">
                     {professionalData.githubAchievements.map((achievement, index) => (
                       <motion.div
@@ -118,7 +121,7 @@ export default function About() {
                         transition={{ duration: 0.3, delay: index * 0.1 }}
                         viewport={{ once: true }}
                       >
-                        <Badge className="bg-gradient-to-r from-green-100 to-blue-100 text-green-800 dark:from-green-900/30 dark:to-blue-900/30 dark:text-green-300">
+                        <Badge className="bg-white/10 text-green-300 border-white/20">
                           <Star className="h-3 w-3 mr-1" />
                           {achievement}
                         </Badge>
@@ -129,7 +132,7 @@ export default function About() {
 
                 {/* Expertise Areas */}
                 <div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-3">Areas of Expertise</h3>
+                  <h3 className="font-semibold text-white mb-3">Areas of Expertise</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {professionalData.expertise.map((area, index) => (
                       <motion.div
@@ -138,9 +141,9 @@ export default function About() {
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.3, delay: index * 0.1 }}
                         viewport={{ once: true }}
-                        className="flex items-center gap-2 text-gray-600 dark:text-gray-300"
+                        className="flex items-center gap-2 text-white/80"
                       >
-                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
                         <span className="text-sm font-medium">{area}</span>
                       </motion.div>
                     ))}
@@ -148,7 +151,7 @@ export default function About() {
                 </div>
 
                 {/* Call to Action */}
-                <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+                <div className="pt-4 border-t border-white/20">
                   <div className="flex flex-wrap gap-3">
                     <Button asChild className="bg-primary hover:bg-primary/90">
                       <a href="/assets/Tinotenda Happy -Finalcv.pdf" target="_blank" className="inline-flex items-center gap-2">
@@ -176,9 +179,9 @@ export default function About() {
             className="space-y-6"
           >
             {/* Core Technologies */}
-            <Card className="border-purple-200 dark:border-gray-700">
+            <Card className="glassmorphism border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
               <CardHeader>
-                <CardTitle className="text-lg text-gray-900 dark:text-white">
+                <CardTitle className="text-lg text-white">
                   Core Technologies
                 </CardTitle>
               </CardHeader>
@@ -194,7 +197,7 @@ export default function About() {
                     >
                       <Badge
                         variant="secondary"
-                        className="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 dark:from-blue-900/30 dark:to-purple-900/30 dark:text-blue-300 hover:scale-105 transition-transform cursor-default"
+                        className="bg-white/10 text-blue-300 border-white/20 hover:scale-105 transition-transform cursor-default"
                       >
                         {skill}
                       </Badge>
@@ -205,9 +208,9 @@ export default function About() {
             </Card>
 
             {/* Professional Links */}
-            <Card className="border-green-200 dark:border-gray-700">
+            <Card className="glassmorphism border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
               <CardHeader>
-                <CardTitle className="text-lg text-gray-900 dark:text-white">
+                <CardTitle className="text-lg text-white">
                   Connect With Me
                 </CardTitle>
               </CardHeader>
@@ -215,7 +218,7 @@ export default function About() {
                 <Button
                   variant="outline"
                   asChild
-                  className="w-full justify-start border-blue-300 text-blue-600 hover:bg-blue-50 dark:border-gray-600 dark:text-blue-400 dark:hover:bg-gray-700"
+                  className="w-full justify-start border-white/20 text-blue-300 hover:bg-white/10"
                 >
                   <a
                     href="https://www.linkedin.com/in/tinotendabiningu"
@@ -232,7 +235,7 @@ export default function About() {
                 <Button
                   variant="outline"
                   asChild
-                  className="w-full justify-start border-gray-300 text-gray-600 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-400 dark:hover:bg-gray-700"
+                  className="w-full justify-start border-white/20 text-white/80 hover:bg-white/10"
                 >
                   <a
                     href="https://github.com/HappyBiningu"
@@ -249,7 +252,7 @@ export default function About() {
                 <Button
                   variant="outline"
                   asChild
-                  className="w-full justify-start border-purple-300 text-purple-600 hover:bg-purple-50 dark:border-gray-600 dark:text-purple-400 dark:hover:bg-gray-700"
+                  className="w-full justify-start border-white/20 text-purple-300 hover:bg-white/10"
                 >
                   <a
                     href={professionalData.portfolio}
@@ -266,7 +269,7 @@ export default function About() {
                 <Button
                   variant="outline"
                   asChild
-                  className="w-full justify-start border-green-300 text-green-600 hover:bg-green-50 dark:border-gray-600 dark:text-green-400 dark:hover:bg-gray-700"
+                  className="w-full justify-start border-white/20 text-green-300 hover:bg-white/10"
                 >
                   <a
                     href={professionalData.website}

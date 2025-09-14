@@ -47,7 +47,7 @@ export default function Hero() {
             ease: "easeInOut",
           }}
         />
-        
+
         {/* Additional dynamic gradients */}
         <motion.div
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-radial from-cyan-500/10 via-transparent to-transparent rounded-full blur-3xl"
@@ -88,6 +88,8 @@ export default function Hero() {
                 src={profileImage} 
                 alt="Tinotenda Biningu" 
                 className="relative rounded-full w-64 h-64 lg:w-80 lg:h-80 object-cover mx-auto shadow-2xl border-4 border-white/20 backdrop-blur-sm"
+                loading="eager"
+                decoding="async"
               />
             </div>
           </motion.div>
@@ -110,7 +112,7 @@ export default function Hero() {
                   Tinotenda
                 </span>
               </h1>
-              
+
               <div className="text-2xl lg:text-4xl font-semibold text-white/90 mb-4 min-h-[3rem] flex items-center justify-center lg:justify-start">
                 <span className="mr-3">I'm a</span>
                 <TypingAnimation 

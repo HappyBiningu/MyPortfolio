@@ -66,10 +66,17 @@ export default function Header() {
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-gradient-to-r from-slate-900/95 via-indigo-900/95 to-slate-900/95 backdrop-blur-md border-b border-white/10 z-50">
+    <>
+      <a 
+        href="#main-content" 
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded z-[100]"
+      >
+        Skip to main content
+      </a>
+      <header className="fixed top-0 left-0 w-full bg-gradient-to-r from-slate-900/95 via-indigo-900/95 to-slate-900/95 backdrop-blur-md border-b border-white/10 z-50">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjOUM5MkFDIiBmaWxsLW9wYWNpdHk9IjAuMDUiPjxwYXRoIGQ9Ik0wIDBoMjB2MjBIMHoiLz48L2c+PC9zdmc+')] opacity-30" />
-      
+
       <div className="container mx-auto px-4 py-3 relative z-10">
         <nav className="flex justify-between items-center">
           <motion.div
@@ -81,7 +88,7 @@ export default function Header() {
               TB<span className="text-primary">.</span>
             </Link>
           </motion.div>
-          
+
           {/* Desktop Navigation */}
           <motion.div 
             className="hidden md:flex items-center space-x-6"
@@ -131,7 +138,7 @@ export default function Header() {
                     <ChevronDown className="h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
                   </DropdownMenuTrigger>
-                  
+
                   <DropdownMenuContent 
                     className="bg-slate-900/95 backdrop-blur-md border-white/10 shadow-2xl min-w-[200px]"
                     sideOffset={5}
@@ -142,10 +149,12 @@ export default function Header() {
                         className="text-white/80 hover:text-primary hover:bg-white/5 focus:bg-white/10 focus:text-primary transition-all duration-300 cursor-pointer"
                         data-testid={`dropdown-item-${item.label.toLowerCase().replace(/\s+/g, '-')}`}
                         onClick={(e) => {
-                          e.preventDefault();
-                          const element = document.querySelector(item.href);
-                          if (element) {
-                            element.scrollIntoView({ behavior: 'smooth' });
+                          if (item.href.startsWith('#')) {
+                            e.preventDefault();
+                            const element = document.querySelector(item.href);
+                            if (element) {
+                              element.scrollIntoView({ behavior: 'smooth' });
+                            }
                           }
                         }}
                       >
@@ -157,7 +166,7 @@ export default function Header() {
               </motion.div>
             ))}
           </motion.div>
-          
+
           {/* Mobile Menu Button */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
@@ -175,7 +184,7 @@ export default function Header() {
             </Button>
           </motion.div>
         </nav>
-        
+
         {/* Mobile Navigation */}
         <AnimatePresence>
           {isMenuOpen && (
@@ -188,7 +197,7 @@ export default function Header() {
             >
               <div className="flex flex-col space-y-2">
                 {/* Mobile menu organized by sections */}
-                
+
                 {/* Standalone links first */}
                 {navStructure.standalone.map((link, index) => (
                   <motion.a
@@ -251,5 +260,6 @@ export default function Header() {
         </AnimatePresence>
       </div>
     </header>
+    </>
   );
 }

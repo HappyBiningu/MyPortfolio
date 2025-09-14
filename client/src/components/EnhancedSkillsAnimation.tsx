@@ -32,8 +32,11 @@ export default function EnhancedSkillsAnimation() {
   const categories = Array.from(new Set(skills.map(skill => skill.category)));
 
   return (
-    <section className="py-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
-      <div className="container mx-auto px-4">
+    <section className="py-16 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiM5QzkyQUMiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSI3IiBjeT0iNyIgcj0iMSIvPjwvZz48L2c+PC9zdmc+')] opacity-20" />
+      
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -41,10 +44,10 @@ export default function EnhancedSkillsAnimation() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl font-heading font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl font-heading font-bold mb-4 text-white">
             Technical Expertise
           </h2>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="text-white/80 max-w-2xl mx-auto">
             Proficiency across the full stack with specialized focus on data science and AI
           </p>
         </motion.div>
@@ -58,7 +61,7 @@ export default function EnhancedSkillsAnimation() {
             viewport={{ once: true }}
             className="mb-8"
           >
-            <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">
+            <h3 className="text-xl font-semibold mb-4 text-white">
               {category}
             </h3>
             
@@ -81,25 +84,25 @@ export default function EnhancedSkillsAnimation() {
                     onHoverEnd={() => setHoveredSkill(null)}
                     className="perspective-1000"
                   >
-                    <Card className="border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300 overflow-hidden">
+                    <Card className="glassmorphism border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 overflow-hidden">
                       <CardContent className="p-4">
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-2">
                             <span className="text-2xl">{skill.icon}</span>
-                            <span className="font-medium text-gray-900 dark:text-white">
+                            <span className="font-medium text-white">
                               {skill.name}
                             </span>
                           </div>
                           <Badge 
                             variant="secondary"
-                            className="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200"
+                            className="bg-white/10 text-white border-white/20"
                           >
                             {skill.level}%
                           </Badge>
                         </div>
                         
                         {/* Animated Progress Bar */}
-                        <div className="relative h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                        <div className="relative h-2 bg-white/20 rounded-full overflow-hidden">
                           <motion.div
                             className={`absolute top-0 left-0 h-full bg-gradient-to-r ${skill.color} rounded-full`}
                             initial={{ width: 0 }}
@@ -135,7 +138,7 @@ export default function EnhancedSkillsAnimation() {
                             height: hoveredSkill === skill.name ? "auto" : 0
                           }}
                           transition={{ duration: 0.3 }}
-                          className="mt-2 text-xs text-gray-600 dark:text-gray-400"
+                          className="mt-2 text-xs text-white/60"
                         >
                           {skill.level >= 90 && "Expert level proficiency"}
                           {skill.level >= 80 && skill.level < 90 && "Advanced proficiency"}
@@ -157,7 +160,7 @@ export default function EnhancedSkillsAnimation() {
           viewport={{ once: true }}
           className="mt-12 text-center"
         >
-          <h3 className="text-lg font-semibold mb-6 text-gray-800 dark:text-white">
+          <h3 className="text-lg font-semibold mb-6 text-white">
             Quick Skills Overview
           </h3>
           <div className="flex flex-wrap justify-center gap-3">

@@ -275,7 +275,7 @@ export default function GitHubStatsDashboard() {
           <StatCard
             icon={<BookOpen className="h-6 w-6" />}
             title="Repositories"
-            value={stats?.stats?.totalRepos || 0}
+            value={stats.stats.totalRepos}
             subtitle="Public projects"
             gradient="from-blue-500 to-purple-600"
             delay={0.1}
@@ -283,7 +283,7 @@ export default function GitHubStatsDashboard() {
           <StatCard
             icon={<Star className="h-6 w-6" />}
             title="Total Stars"
-            value={stats?.stats?.totalStars || 0}
+            value={stats.stats.totalStars}
             subtitle="Community appreciation"
             gradient="from-yellow-500 to-orange-600"
             delay={0.2}
@@ -291,7 +291,7 @@ export default function GitHubStatsDashboard() {
           <StatCard
             icon={<GitFork className="h-6 w-6" />}
             title="Total Forks"
-            value={stats?.stats?.totalForks || 0}
+            value={stats.stats.totalForks}
             subtitle="Project contributions"
             gradient="from-green-500 to-teal-600"
             delay={0.3}
@@ -299,7 +299,7 @@ export default function GitHubStatsDashboard() {
           <StatCard
             icon={<Users className="h-6 w-6" />}
             title="Followers"
-            value={stats?.profile?.followers || 0}
+            value={stats.profile.followers}
             subtitle="Developer network"
             gradient="from-purple-500 to-pink-600"
             delay={0.4}
@@ -312,7 +312,7 @@ export default function GitHubStatsDashboard() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
         >
-          <LanguageChart languages={stats?.languages || []} />
+          <LanguageChart languages={stats.languages} />
         </motion.div>
 
         {/* Profile Summary */}
@@ -333,25 +333,25 @@ export default function GitHubStatsDashboard() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-4">
                   <div>
-                    <h3 className="text-white font-semibold text-lg">{stats?.profile?.name || 'Tinotenda Happy'}</h3>
-                    <p className="text-white/60">@{stats?.profile?.login || 'HappyBiningu'}</p>
+                    <h3 className="text-white font-semibold text-lg">{stats.profile.name}</h3>
+                    <p className="text-white/60">@{stats.profile.login}</p>
                   </div>
-                  {stats?.profile?.bio && (
+                  {stats.profile.bio && (
                     <p className="text-white/80">{stats.profile.bio}</p>
                   )}
                 </div>
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
                     <span className="text-white/80">Public Repositories</span>
-                    <span className="text-white font-semibold">{stats?.profile?.public_repos || 0}</span>
+                    <span className="text-white font-semibold">{stats.profile.public_repos}</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-white/80">Following</span>
-                    <span className="text-white font-semibold">{stats?.profile?.following || 0}</span>
+                    <span className="text-white font-semibold">{stats.profile.following}</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-white/80">Followers</span>
-                    <span className="text-white font-semibold">{stats?.profile?.followers || 0}</span>
+                    <span className="text-white font-semibold">{stats.profile.followers}</span>
                   </div>
                 </div>
               </div>

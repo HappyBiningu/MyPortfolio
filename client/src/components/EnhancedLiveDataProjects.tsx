@@ -1,12 +1,9 @@
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useBitcoinPrice, useGitHubStats } from "@/hooks/useGitHubData";
+import { useGitHubStats } from "@/hooks/useGitHubData";
 import { 
   TrendingUp, 
-  TrendingDown, 
-  DollarSign, 
   Activity,
   Code,
   GitCommit,
@@ -14,118 +11,8 @@ import {
   Zap,
   BarChart3
 } from "lucide-react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-function BitcoinPriceCard() {
-  const { data: bitcoinData, isLoading, isError } = useBitcoinPrice();
-  const [priceHistory, setPriceHistory] = useState<any[]>([]);
-
-  useEffect(() => {
-    if (bitcoinData) {
-      setPriceHistory(prev => {
-        const newEntry = {
-          time: new Date().toLocaleTimeString(),
-          price: bitcoinData.price
-        };
-        const updated = [...prev, newEntry];
-        return updated.slice(-10); // Keep last 10 entries
-      });
-    }
-  }, [bitcoinData]);
-
-  if (isLoading) {
-    return (
-      <Card className="glassmorphism border-white/20 bg-white/5">
-        <CardHeader>
-          <CardTitle className="text-white flex items-center gap-2">
-            <DollarSign className="h-5 w-5" />
-            Bitcoin Price
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <Skeleton className="h-8 w-32 bg-white/20" />
-          <Skeleton className="h-4 w-24 bg-white/20" />
-          <Skeleton className="h-32 w-full bg-white/20" />
-        </CardContent>
-      </Card>
-    );
-  }
-
-  if (isError || !bitcoinData) {
-    return (
-      <Card className="glassmorphism border-white/20 bg-white/5">
-        <CardHeader>
-          <CardTitle className="text-white flex items-center gap-2">
-            <DollarSign className="h-5 w-5" />
-            Bitcoin Price
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-white/60">Failed to load Bitcoin price</p>
-        </CardContent>
-      </Card>
-    );
-  }
-
-  const isPositive = bitcoinData.change24h >= 0;
-
-  return (
-    <Card className="glassmorphism border-white/20 bg-white/5 hover:bg-white/10 transition-all duration-300">
-      <CardHeader>
-        <CardTitle className="text-white flex items-center gap-2">
-          <DollarSign className="h-5 w-5 text-yellow-400" />
-          Bitcoin Price (Live)
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="flex items-baseline gap-2">
-          <span className="text-3xl font-bold text-white">
-            ${bitcoinData.price.toLocaleString()}
-          </span>
-          <div className={`flex items-center gap-1 ${isPositive ? 'text-green-400' : 'text-red-400'}`}>
-            {isPositive ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />}
-            <span className="font-semibold">
-              {isPositive ? '+' : ''}{bitcoinData.change24h.toFixed(2)}%
-            </span>
-          </div>
-        </div>
-
-        <Badge 
-          variant="outline" 
-          className={`${isPositive ? 'bg-green-400/20 text-green-400 border-green-400/30' : 'bg-red-400/20 text-red-400 border-red-400/30'}`}
-        >
-          24h Change
-        </Badge>
-
-        {priceHistory.length > 2 && (
-          <div className="h-24">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={priceHistory}>
-                <Line 
-                  type="monotone" 
-                  dataKey="price" 
-                  stroke={isPositive ? "#4ade80" : "#f87171"} 
-                  strokeWidth={2}
-                  dot={false}
-                />
-                <Tooltip 
-                  contentStyle={{ 
-                    backgroundColor: 'rgba(0,0,0,0.8)', 
-                    border: 'none', 
-                    borderRadius: '8px',
-                    color: 'white'
-                  }}
-                  formatter={(value: any) => [`$${value.toLocaleString()}`, 'Price']}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        )}
-      </CardContent>
-    </Card>
-  );
-}
 
 function GitHubStatsCard() {
   const { data: stats, isLoading } = useGitHubStats();
@@ -314,25 +201,16 @@ export default function EnhancedLiveDataProjects() {
             Live Data & Analytics
           </h2>
           <p className="text-white/80 max-w-2xl mx-auto">
-            Real-time data insights and interactive visualizations showcasing live market data and coding statistics
+            Real-time data insights and interactive visualizations showcasing coding statistics and development activity
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <BitcoinPriceCard />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
           >
             <GitHubStatsCard />
           </motion.div>
@@ -341,8 +219,7 @@ export default function EnhancedLiveDataProjects() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="lg:col-span-2 xl:col-span-1"
+            transition={{ duration: 0.5, delay: 0.2 }}
           >
             <ContributionHeatmap />
           </motion.div>

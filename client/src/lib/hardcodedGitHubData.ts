@@ -326,6 +326,24 @@ export const hardcodedGitHubStats = {
   ]
 };
 
+export const hardcodedGitHubStats = {
+  profile: hardcodedGitHubProfile,
+  stats: {
+    totalStars: 91,
+    totalForks: 25,
+    totalRepos: 25
+  },
+  languages: [
+    { language: "TypeScript", percentage: "35.2" },
+    { language: "JavaScript", percentage: "28.7" },
+    { language: "Python", percentage: "15.3" },
+    { language: "Solidity", percentage: "8.9" },
+    { language: "Java", percentage: "6.1" },
+    { language: "HTML", percentage: "3.4" },
+    { language: "CSS", percentage: "2.4" }
+  ]
+};
+
 export const hardcodedGitHubActivity = [
   {
     id: "54661153805",
